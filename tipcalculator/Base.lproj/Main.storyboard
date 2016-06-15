@@ -23,9 +23,14 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tip" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tGu-Dx-cs9">
                                 <rect key="frame" x="27" y="167" width="25" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="KaP-48-H2N" appends="YES" id="cYC-eo-6c7"/>
+                                    <outletCollection property="gestureRecognizers" destination="tPk-Lg-MV1" appends="YES" id="OFc-Pv-6ut"/>
+                                </connections>
                             </label>
                             <view contentMode="scaleToFill" id="Yx0-e2-CtD">
                                 <rect key="frame" x="8" y="220" width="306" height="8"/>
@@ -81,7 +86,14 @@
                             <outletCollection property="gestureRecognizers" destination="knV-q3-I0C" appends="YES" id="e2U-yT-AkY"/>
                         </connections>
                     </view>
-                    <navigationItem key="navigationItem" title="Tip Calculator" id="aYz-mJ-FzZ"/>
+                    <navigationItem key="navigationItem" title="Tip Calculator" id="aYz-mJ-FzZ">
+                        <barButtonItem key="rightBarButtonItem" title="Settings" id="wWc-dO-HaS">
+                            <connections>
+                                <action selector="test:" destination="BYZ-38-t0r" id="CC0-O5-2a3"/>
+                                <segue destination="FAM-BG-Alm" kind="push" id="PEI-8e-rvm"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="billField" destination="YAD-kX-lvA" id="5ak-YV-0gU"/>
                         <outlet property="tipControl" destination="uRu-Ug-sqO" id="8iL-AA-nZU"/>
@@ -95,8 +107,57 @@
                         <action selector="onTap:" destination="BYZ-38-t0r" id="u1H-YI-SSR"/>
                     </connections>
                 </tapGestureRecognizer>
+                <tapGestureRecognizer id="KaP-48-H2N">
+                    <connections>
+                        <action selector="settingsTap:" destination="BYZ-38-t0r" id="haW-8S-6Hq"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="tPk-Lg-MV1"/>
             </objects>
-            <point key="canvasLocation" x="734" y="289"/>
+            <point key="canvasLocation" x="1798" y="289"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="ZFc-rt-j5F">
+            <objects>
+                <viewController id="FAM-BG-Alm" customClass="SettingsViewController" customModule="tipcalculator" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="USj-UY-lAh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Default Tip" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="5ae-X1-ZO1">
+                                <rect key="frame" x="20" y="78" width="97" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="f7k-SM-tpU">
+                                <rect key="frame" x="179" y="78" width="121" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="18%"/>
+                                    <segment title="20%"/>
+                                    <segment title="25%"/>
+                                </segments>
+                            </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ZWb-tw-x9K">
+                                <rect key="frame" x="142" y="137" width="37" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Done"/>
+                                <connections>
+                                    <action selector="doneButtonTapper:" destination="FAM-BG-Alm" eventType="touchUpInside" id="dSt-DA-pwZ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Settings" id="cJO-d8-qTI"/>
+                    <connections>
+                        <outlet property="defaultSegmentedControl" destination="f7k-SM-tpU" id="HtV-Fl-vQ3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iMo-ob-gr0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2154" y="289"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="26L-cs-nKk">
@@ -109,12 +170,50 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="vhC-ob-SUZ"/>
+                        <segue destination="L9S-sV-7YP" kind="relationship" relationship="rootViewController" id="vhC-ob-SUZ"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkM-6v-ikQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="202" y="289"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="b1o-Ov-AwJ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="L9S-sV-7YP" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="cvz-pp-yhI"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="E7P-we-x9W">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="CWP-6A-h0A" kind="relationship" relationship="rootViewController" id="gFw-Lg-ALm"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y8Z-FE-vTu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="734" y="289"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="bAt-co-mKq">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CWP-6A-h0A" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="LpM-jW-Gaa"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qLD-MH-Fm4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="H1E-HW-HGb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nbm-Ar-Pnd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1266" y="289"/>
         </scene>
     </scenes>
 </document>
